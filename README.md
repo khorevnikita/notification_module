@@ -29,136 +29,37 @@ use Notifiable
 ```
 {
     "status": "success",
-    "notifications": {
-        "updated_at": "2022-01-13T12:17:16.000000Z",
-        "created_at": "2022-01-13T12:17:16.000000Z",
-        "id": 2
-    }
-}
-```
-
-### Список моих чатов
-
-#### METHOD: GET
-
-#### URL: /api/chats
-
-#### RESPONSE: 
-```
-{
-    "status": "success",
-    "chats": [
+    "notifications": [
         {
             "id": 2,
-            "created_at": "2022-01-13T12:17:16.000000Z",
-            "updated_at": "2022-01-13T12:17:16.000000Z",
-            "new_messages_count": 0,
-            "pivot": {
-                "user_id": 1,
-                "chat_id": 2,
-                "last_opened_at": null
-            },
-            "target_user": {
-                "id": 2,
-                "name": "Ira",
-                "username": "IrSink",
-                "avatar": "http://localhost/storage/1641842698-cnr.png",
-                "lat": 55.777216,
-                "lon": 37.52706,
-                "status": "online",
-                "laravel_through_key": 2
-            },
-            "last_message": null
-        }
+            "type": "email",
+            "title": "первое уведомление",
+            "text": "Привет всем!",
+            "sent_at": null,
+            "created_at": "2022-01-28T10:47:45.000000Z",
+            "updated_at": "2022-01-28T10:47:45.000000Z",
+            "users_count": 0
+        },
     ],
-    "total": 3
+    "total": 1,
+    "pages": 1
 }
 ```
 
-### Кол-во новых сообщений
 
-#### METHOD: GET
-
-#### URL: /api/chats/new-message-count
-
-#### RESPONSE: 
-```
-{
-    "status": "success",
-    "chats": [
-        {
-            "id": 2,
-            "created_at": "2022-01-13T12:17:16.000000Z",
-            "updated_at": "2022-01-13T12:17:16.000000Z",
-            "new_messages_count": 0,
-            "pivot": {
-                "user_id": 1,
-                "chat_id": 2,
-                "last_opened_at": null
-            },
-            "target_user": {
-                "id": 2,
-                "name": "Ira",
-                "username": "IrSink",
-                "avatar": "http://localhost/storage/1641842698-cnr.png",
-                "lat": 55.777216,
-                "lon": 37.52706,
-                "status": "online",
-                "laravel_through_key": 2
-            },
-            "last_message": null
-        }
-    ],
-    "total": 3
-}
-```
-
-### Список сообщений в чате
-
-#### METHOD: GET
-
-#### URL: /api/chats/{CHAT_ID}/messages
-
-#### RESPONSE: 
-```
-{
-    "status": "success",
-    "messages": [
-        {
-            "id": 1,
-            "chat_id": 2,
-            "user_id": 2,
-            "type": "text",
-            "body": "Чего молчим?(",
-            "created_at": "2022-01-13T12:18:32.000000Z",
-            "updated_at": "2022-01-13T12:18:32.000000Z",
-            "author": {
-                "id": 2,
-                "name": "Ira",
-                "username": "IrSink",
-                "avatar": "http://localhost/storage/1641842698-cnr.png",
-                "lat": 55.777216,
-                "lon": 37.52706,
-                "status": "online"
-            }
-        }
-    ],
-    "total": 1
-}
-```
-
-### Отправить сообщение в чат
+### Создать уведомление
 
 #### METHOD: POST
 
-#### URL: /api/chats/{CHAT_ID}/messages
+#### URL: /api/notifications
 
 #### BODY
 
 ```
 {
-    "type":"text",
-    "body":"Чего молчим?("
+    "type": "email",
+    "title": "первое уведомление",
+    "text": "Привет всем!"
 }
 ```
 
@@ -166,30 +67,30 @@ use Notifiable
 ```
 {
     "status": "success",
-    "message": {
-        "chat_id": "2",
-        "type": "text",
-        "body": "Чего молчим?(",
-        "user_id": 2,
-        "updated_at": "2022-01-13T12:18:32.000000Z",
-        "created_at": "2022-01-13T12:18:32.000000Z",
+    "notification": {
+        "type": "email",
+        "title": "первое уведомление",
+        "text": "Привет всем!",
+        "updated_at": "2022-01-28T10:47:10.000000Z",
+        "created_at": "2022-01-28T10:47:10.000000Z",
         "id": 1
     }
 }
 ```
 
-### Изменить сообщение
+### Изменить уведомление
 
 #### METHOD: PUT
 
-#### URL: /api/chats/{CHAT_ID}/messages/{MESSAGE_ID}
+#### URL: /api/notifications/{NOTIFICATION_ID}
 
 #### BODY
 
 ```
 {
-    "type":"text",
-    "body":"Чего молчим?("
+    "type": "email",
+    "title": "первое уведомление!",
+    "text": "Привет всем!"
 }
 ```
 
@@ -197,14 +98,14 @@ use Notifiable
 ```
 {
     "status": "success",
-    "message": {
-        "chat_id": "2",
-        "type": "text",
-        "body": "Чего молчим?(",
-        "user_id": 2,
-        "updated_at": "2022-01-13T12:18:32.000000Z",
-        "created_at": "2022-01-13T12:18:32.000000Z",
-        "id": 1
+    "notification": {
+        "id": 3,
+        "type": "email",
+        "title": "первое уведомление!",
+        "text": "Привет всем!",
+        "sent_at": null,
+        "created_at": "2022-01-28T10:47:49.000000Z",
+        "updated_at": "2022-01-28T10:47:49.000000Z"
     }
 }
 ```
@@ -214,7 +115,7 @@ use Notifiable
 
 #### METHOD: DELETE
 
-#### URL: /api/chats/{CHAT_ID}/messages/{MESSAGE_ID}
+#### URL: /api/notifications/{NOTIFICATION_ID}
 
 #### RESPONSE: 
 ```
@@ -223,5 +124,62 @@ use Notifiable
 }
 ```
 
+### Получить список прикреплённых пользователей
+
+#### METHOD: GET
+
+#### URL: /api/notifications/{NOTIFICATION_ID}/get-users
+
+#### RESPONSE:
+```
+{
+    "status": "success",
+    "users": [
+        {
+            "id": 1,
+            "name": "Nikita",
+        }
+    ]
+}
+```
+
+### Синхронизировать список пользователей
+
+#### METHOD: POST
+
+#### URL: /api/notifications/{NOTIFICATION_ID}/set-users
+
+#### BODY
+
+```
+{
+    "users": [
+        1,
+        2,
+        3
+    ]
+}
+```
+
+#### RESPONSE:
+```
+{
+    "status": "success"
+}
+```
+
+
+### Поставить на отправку
+
+#### METHOD: POST
+
+#### URL: /api/notifications/{NOTIFICATION_ID}/send
+
+#### RESPONSE:
+```
+{
+    "status": "success"
+}
+```
 
 
