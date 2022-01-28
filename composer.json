@@ -1,0 +1,32 @@
+{
+    "name": "khonik/notifications",
+    "description": "Fast way to create notifications",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Khonik",
+            "email": "nkhoreff@yandex.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Khonik\\Notifications\\": "src/"
+        },
+        "classmap": [
+            "src/Providers",
+            "src/Models",
+            "src/Policies",
+            "src/Controllers",
+            "src/Traits",
+            "src/Events",
+            "src/Mail",
+            "src/Jobs",
+            "src/Requests"
+        ]
+    },
+    "require": {
+        "php": "^7.3|^8.0",
+        "ext-curl": "*"
+    }
+}
