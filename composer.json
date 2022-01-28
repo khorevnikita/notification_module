@@ -14,12 +14,9 @@
             "Khonik\\Notifications\\": "src/"
         },
         "classmap": [
-            "src/Providers",
             "src/Models",
-            "src/Policies",
             "src/Controllers",
             "src/Traits",
-            "src/Events",
             "src/Mail",
             "src/Jobs",
             "src/Requests"
