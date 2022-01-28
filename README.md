@@ -17,6 +17,21 @@ php artisan migrate
 ### 5. Добавляем trait в модель User
 use Notifiable
 
+### 6. Ставим ключи
+в config/services.php:
+
+```
+'firebase'=> [
+    'key'=>env("FIREBASE_KEY")
+]
+```
+
+и в .env
+
+```
+FIREBASE_KEY=
+```
+
 ## Использование
 
 ### Получить список уведомления
