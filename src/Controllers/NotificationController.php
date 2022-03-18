@@ -17,7 +17,7 @@ class NotificationController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request):JsonResponse
+    public function index(Request $request): JsonResponse
     {
         $notifications = Notification::withCount("users");
 
@@ -29,7 +29,7 @@ class NotificationController extends Controller
             $notifications = $notifications->orderBy($request->sortBy, $request->sortDesc ? "desc" : "asc");
         }
 
-        if ($request->type && in_array($request->type,['push','email'])) {
+        if ($request->type && in_array($request->type, ['push', 'email'])) {
             $notifications = $notifications->where("type", $request->type);
         }
 
@@ -59,7 +59,7 @@ class NotificationController extends Controller
      * @param NotificationCreateRequest $request
      * @return JsonResponse
      */
-    public function store(NotificationCreateRequest $request):JsonResponse
+    public function store(NotificationCreateRequest $request): JsonResponse
     {
         $notification = new Notification($request->all());
         $notification->save();
@@ -92,7 +92,7 @@ class NotificationController extends Controller
      * @param Notification $notification
      * @return JsonResponse
      */
-    public function update(NotificationCreateRequest $request, $notification_id):JsonResponse
+    public function update(NotificationCreateRequest $request, $notification_id): JsonResponse
     {
         $notification = Notification::findOrFail($notification_id);
         $notification->fill($request->all());
@@ -107,7 +107,7 @@ class NotificationController extends Controller
      * @param Notification $notification
      * @return JsonResponse
      */
-    public function destroy($notification_id):JsonResponse
+    public function destroy($notification_id): JsonResponse
     {
         $notification = Notification::findOrFail($notification_id);
         $notification->delete();
@@ -151,6 +151,17 @@ class NotificationController extends Controller
         return response()->json([
             'status' => "success",
             'notification' => $notification
+        ]);
+    }
+
+    public function setToken(Request $request)
+    {
+        $user = auth()->user();
+        $user->device_token = $request->device_token;
+        $user->save();
+
+        return response()->json([
+            'status' => 'success'
         ]);
     }
 }
