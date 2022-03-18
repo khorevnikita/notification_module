@@ -154,10 +154,11 @@ class NotificationController extends Controller
         ]);
     }
 
-    public function setToken(Request $request)
+    public function setDevice(Request $request)
     {
         $user = auth()->user();
         $user->device_token = $request->device_token;
+        $user->device_type = $request->device_type;
         $user->save();
 
         return response()->json([
