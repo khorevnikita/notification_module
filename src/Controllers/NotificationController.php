@@ -25,7 +25,7 @@ class NotificationController extends Controller
             $notifications = $notifications->where("title", "like", "%$request->search%");
         }
 
-        if ($request->sortBy) {
+        if ($request->sort_by) {
             $notifications = $notifications->orderBy($request->sort_by, $request->sort_desc ? "desc" : "asc");
         }
 
