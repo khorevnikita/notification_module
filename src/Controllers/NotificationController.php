@@ -26,7 +26,7 @@ class NotificationController extends Controller
         }
 
         if ($request->sortBy) {
-            $notifications = $notifications->orderBy($request->sortBy, $request->sortDesc ? "desc" : "asc");
+            $notifications = $notifications->orderBy($request->sort_by, $request->sort_desc ? "desc" : "asc");
         }
 
         if ($request->type && in_array($request->type, ['push', 'email'])) {
@@ -34,9 +34,15 @@ class NotificationController extends Controller
         }
 
         $total = $notifications->count();
-        $take = 30;
+        $take = $request->take ?: 30;
         $skip = ($request->page - 1) * $take;
-        $notifications = $notifications->skip($skip)->take($take)->get();
+        $notifications = $notifications;
+
+        if ($take > 0) {
+            $notifications = $notifications->skip($skip)->take($take);
+        }
+
+        $notifications = $notifications->get();
         return response()->json([
             'status' => "success",
             'notifications' => $notifications,
